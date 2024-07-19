@@ -3,9 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController;
+use PHPUnit\Framework\Attributes\PostCondition;
 
 Route::get('/test', [TestController::class, 'test'])
 ->name('test');
+
+Route::get('/create', [PostController::class, 'create'])
+->name('create');
+
+Route::post('post', [PostController::class, 'store'])
+->name('post.store');
 
 Route::get('/', function () {
     return view('welcome');
