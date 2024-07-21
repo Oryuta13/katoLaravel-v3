@@ -12,13 +12,23 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
-
-        $post = Post::create([
-            'title' => $request->title,
-            'body' => $request->body,
+        $validated = $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required|max:400',
         ]);
 
-        $request->session()->flash('message', '保存しました');
+        $validated['user_id'] = auth()->id();
+
+        $post = Post::create($validated);
+
         return back()->with('message', '保存しました');
+    }
+
+    public function index() {
+        // ログインしているユーザーの投稿を取得する
+        $posts = Post::where('user_id', auth()->id())->get();
+        // ログインしていないユーザーの投稿を取得する
+        // $posts = Post::where('user_id', '!=', auth()->id())->get();
+        return view('post.index', compact('posts'));
     }
 }
