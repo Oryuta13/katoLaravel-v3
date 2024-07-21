@@ -9,19 +9,22 @@ use PHPUnit\Framework\Attributes\PostCondition;
 Route::get('/test', [TestController::class, 'test'])
 ->name('test');
 
-Route::middleware( ['auth', 'admin'] )->group(function () {
+// Route::middleware( ['auth', 'admin'] )->group(function () {
     Route::get('post', [PostController::class, 'index'])
     ->name('post.index');
     Route::get('post/create', [PostController::class, 'create'])
     ->name('post.create');
-});
+// });
 
 Route::post('post', [PostController::class, 'store'])
 ->name('post.store');
 
+Route::get('post/show/{post}', [PostController::class, 'show'])
+->name('post.show');
+
 Route::get('/', function () {
     return view('welcome');
-}) ->middleware('auth');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
