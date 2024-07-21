@@ -22,6 +22,12 @@ Route::post('post', [PostController::class, 'store'])
 Route::get('post/show/{post}', [PostController::class, 'show'])
 ->name('post.show');
 
+Route::get('post/{post}/edit', [PostController::class, 'edit'])
+->name('post.edit');
+
+Route::patch('post/{post}', [PostController::class, 'update'])
+->name('post.update');
+
 Route::get('/', function () {
     return view('welcome');
 });
