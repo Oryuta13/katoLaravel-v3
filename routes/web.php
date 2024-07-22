@@ -28,6 +28,9 @@ Route::get('post/{post}/edit', [PostController::class, 'edit'])
 Route::patch('post/{post}', [PostController::class, 'update'])
 ->name('post.update');
 
+Route::delete('post/{post}', [PostController::class, 'destroy'])
+->name('post.destroy');
+
 Route::get('/', function () {
     return view('welcome');
 });
