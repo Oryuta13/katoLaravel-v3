@@ -29,9 +29,10 @@ class PostController extends Controller
 
     public function index() {
         // ログインしているユーザーの投稿を取得する
-        $posts = Post::where('user_id', auth()->id())->get();
+        // $posts = Post::where('user_id', auth()->id())->get();
         // ログインしていないユーザーの投稿を取得する
         // $posts = Post::where('user_id', '!=', auth()->id())->get();
+        $posts = Post::paginate(10);
         return view('post.index', compact('posts'));
     }
 
